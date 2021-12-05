@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'channels',
     'django.contrib.humanize',
 ]
+AUTH_USER_MODEL = 'account.Account'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -99,7 +100,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = 'account.Account'
+
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.AllowAllUsersModelBackend',
     'account.backends.CaseInsensitiveModelBackend',

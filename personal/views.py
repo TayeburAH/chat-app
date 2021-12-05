@@ -4,7 +4,7 @@ from django.conf import settings
 from bs4 import BeautifulSoup
 import requests
 
-DEBUG = True
+DEBUG = False
 
 
 def home_screen_view(request):
