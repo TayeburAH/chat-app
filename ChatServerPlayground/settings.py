@@ -135,18 +135,15 @@ USE_TZ = True
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10mb = 10 * 1024 *1024
 
-
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'media'),
 ]
 
 # creates url for all static files
-STATIC_URL = '/static/'
+
 MEDIA_URL = '/media/'
-
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
 
 TEMP = os.path.join(BASE_DIR, 'media_cdn/temp')  # to store files
@@ -178,7 +175,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+            "hosts": ["redis-19487.c52.us-east-1-4.ec2.cloud.redislabs.com:19487"],
         },
     },
 }
