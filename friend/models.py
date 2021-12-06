@@ -1,12 +1,11 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.auth import get_user_model
 from django.utils import timezone
-User = get_user_model()
+
 
 class FriendList(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user")
-    friends = models.ManyToManyField(User, blank=True, related_name="friends")
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user")
+    friends = models.ManyToManyField(settings.AUTH_USER_MODEL, blank=True, related_name="friends")
 
     # I need a list of accounts here
 
@@ -59,8 +58,8 @@ class FriendRequest(models.Model):
 			- Person receiving the friend friend
 	"""
 
-    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sender")
-    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name="receiver")
+    sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="sender")
+    receiver = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="receiver")
 
     is_active = models.BooleanField(blank=False, null=False, default=True)
     # to check whether a friend request is active or

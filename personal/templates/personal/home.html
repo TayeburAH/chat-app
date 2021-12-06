@@ -147,6 +147,7 @@ PUBLIC CHAT
 		}
 		// new payload of messages coming in from backend
 		if(data.messages_payload){
+			console.log(data.messages_payload)
 			console.log("PAYLOAD")
 			handleMessagesPayload(data.messages, data.new_page_number)
 		}

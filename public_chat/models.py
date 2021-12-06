@@ -1,9 +1,5 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.auth import get_user_model
-from django.utils import timezone
-
-User = get_user_model()
 
 
 class PublicChatRoom(models.Model):
@@ -11,7 +7,7 @@ class PublicChatRoom(models.Model):
     title = models.CharField(max_length=255, unique=True, blank=False, )
 
     # all users who are authenticated and viewing the chat
-    users = models.ManyToManyField(User, help_text="users who are connected to chat room.")
+    users = models.ManyToManyField(settings.AUTH_USER_MODEL, help_text="users who are connected to chat room.")
 
     def __str__(self):
         return self.title
@@ -59,7 +55,7 @@ class PublicRoomChatMessage(models.Model):
     """
     Chat message created by a user inside a PublicChatRoom
     """
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     room = models.ForeignKey(PublicChatRoom, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     content = models.TextField(unique=False, blank=False, )

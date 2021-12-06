@@ -85,20 +85,7 @@ django_heroku.settings(locals())
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DB_NAME = "chat_database"
-DB_USER = "tayebur"
-DB_PASSWORD = "1234"
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
 
 
 AUTHENTICATION_BACKENDS = (
@@ -155,6 +142,22 @@ TEMP = os.path.join(BASE_DIR, 'media_cdn/temp')  # to store files
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+DB_NAME = "chat_database2"
+DB_USER = "tayebur"
+DB_PASSWORD = "1234"
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 # pip install channels-redis
 # Local
 # CHANNEL_LAYERS = {
@@ -166,13 +169,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #     },
 # }
 
-# Django database
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
+
 
 # Heroku Postgres
 import dj_database_url
@@ -185,7 +182,8 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            "hosts": ["redis-19487.c52.us-east-1-4.ec2.cloud.redislabs.com:19487"],
+            "hosts": [
+                'redis://h:zYr6JggAk2fBRiD0rTlqECP8jhdr4hcp@redis-19487.c52.us-east-1-4.ec2.cloud.redislabs.com:19487'],
         },
     },
 }

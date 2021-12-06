@@ -12,7 +12,7 @@ from datetime import datetime
 from .models import PublicChatRoom, PublicRoomChatMessage
 
 User = get_user_model()
-
+# manually you need to create a instance in PublicChatRoom with any title
 MSG_TYPE_MESSAGE = 0  # For standard messages
 MSG_TYPE_CONNECTED_USER_COUNT = 1  # Sending the number of connected users to the chat room
 DEFAULT_ROOM_CHAT_MESSAGE_PAGE_SIZE = 10
@@ -65,7 +65,9 @@ class PublicChatConsumer(AsyncJsonWebsocketConsumer):
             elif command == "get_room_chat_messages":
                 await self.display_progress_bar(True)
                 room = await get_room_or_error(content['room_id'])
+
                 payload = await get_room_chat_messages(room, content['page_number'])
+
                 if payload != None:
                     payload = json.loads(payload)
                     await self.send_messages_payload(payload['messages'], payload['new_page_number'])
@@ -280,6 +282,7 @@ def get_room_or_error(room_id):
     Tries to fetch a room for the user
     """
     try:
+
         room = PublicChatRoom.objects.get(pk=room_id)
     except PublicChatRoom.DoesNotExist:
         raise ClientError("ROOM_INVALID", "Invalid room.")
@@ -291,17 +294,17 @@ def get_room_chat_messages(room, page_number):
     try:
         qs = PublicRoomChatMessage.objects.by_room(room)
         p = Paginator(qs, DEFAULT_ROOM_CHAT_MESSAGE_PAGE_SIZE)
-
         payload = {}
         messages_data = None
         new_page_number = int(page_number)
-        if new_page_number < p.num_pages:
+        if new_page_number <= p.num_pages:
             s = LazyRoomChatMessageEncoder()
             payload['messages'] = s.serialize(p.page(page_number).object_list)
             new_page_number = new_page_number + 1
         else:
             payload['messages'] = "None"
         payload['new_page_number'] = new_page_number
+
         return json.dumps(payload)
     except Exception as e:
         print("EXCEPTION: " + str(e))
