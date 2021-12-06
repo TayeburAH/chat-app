@@ -190,3 +190,4 @@ CHANNEL_LAYERS = {
 
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+BASE_DIR = ''

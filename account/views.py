@@ -175,7 +175,6 @@ def account_view(request, *args, **kwargs):
         context['is_friend'] = is_friend
         context['request_sent'] = request_sent
         context['friend_requests'] = friend_requests
-        context['BASE_URL'] = settings.BASE_URL
         return render(request, "account/account.html", context)
 
 
