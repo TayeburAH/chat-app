@@ -80,7 +80,7 @@ TEMPLATES = [
 ]
 
 # WSGI_APPLICATION = 'ChatServerPlayground.wsgi.application'
-ASGI_APPLICATION = 'ChatServerPlayground.asgi.application'
+ASGI_APPLICATION = 'ChatServerPlayground.routing.application'
 django_heroku.settings(locals())
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
