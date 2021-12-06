@@ -30,7 +30,7 @@ if DEBUG:
 else:
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['lets-chat-all-day.herokuapp.com/']
 # Application definition
 
 INSTALLED_APPS = [
